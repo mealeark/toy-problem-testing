@@ -1,14 +1,4 @@
 # Change log
-## 0.3 Update README
-- @JohnWebb4 README includes install guide, and licensing
-## 0.2 Get Problem
-### New
-- @JohnWebb4 Get 3Sum problem
-
-## 0.1 Setup ESLint and Jest
-### New
-- @JohnWebb4 Create maintainers, changelog, git ignore, and packages json
-
-## Initial
-### New
-- @JohnWebb4 Create license and basic README
+## Setup
+## New
+- @JohnWebb4 Setup Babel, ES Lint, and test configuration files [#3](https://github.com/JohnWebb4/toy-problem-testing/pull/3)
