@@ -1,0 +1,35 @@
+{
+  "name": "toy-problem-testing",
+  "version": "1.0.0",
+  "description": "Toy Problems with Jest testing",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnWebb4/toy-problem-testing.git"
+  },
+  "keywords": [
+    "Toy",
+    "Problems",
+    "Testing",
+    "Jest"
+  ],
+  "author": "JohnWebb4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JohnWebb4/toy-problem-testing/issues"
+  },
+  "homepage": "https://github.com/JohnWebb4/toy-problem-testing#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-jest": "^23.4.0",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.4.0"
+  }
+}
