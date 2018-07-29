@@ -92,8 +92,8 @@ thousands (1000-9000):
 
 */
 
-Number.prototype.toEnglish = function () {
-  // return my value as english words
+Number.prototype.toEnglish = function (number) {
+  // 
 };
 
 if (window.DEBUG) {
