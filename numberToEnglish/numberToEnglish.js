@@ -93,7 +93,32 @@ thousands (1000-9000):
 */
 
 Number.prototype.toEnglish = function (number) {
-  // 
+  var num = this; 
+  var result, numLeft, numInPlace, place, restOfString;
+  if (numbersToWords[num]) {
+    result = numbersToWords[num];
+  } else if (num < 100) {
+    numInPlace = Math.floor(num/10);
+    numLeft = num % 10;
+    result = numbersToWords[numInPlace * 10] + '-' + numbersToWords[numLeft];
+  } else {
+    if (num < 1000) {
+      place = 100;
+    } else {
+      place = 1000;
+      while (place * 1000 <= num) {
+        place *= 1000;
+      }
+    }
+    numInPlace = Math.floor(num / place);
+    numLeft = num % place;
+    result = numInPlace.toEnglish() + ' ' + numbersToPlace[place];
+    restOfString = numLeft.toEnglish();
+    if (restOfString !== 'zero') {
+      result += ' ' + restOfString;
+    }
+  }
+  return result;
 };
 
 if (window.DEBUG) {
