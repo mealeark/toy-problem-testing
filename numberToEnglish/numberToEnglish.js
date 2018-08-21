@@ -53,74 +53,110 @@ const numbersToPlace = {
   1000000000000000000: 'quintillion',
 };
 
-// O: string represent the number in English
+// O: string
 // I: number
 // C: none
-// E: account for nums >= 20,
-// which need dashes with the number in its ones place
-// dashes are only included for tens place
+// E: consider cases like "thirty seven"
 
-/*
-Diagramming
-ones (1-9): call the value from the obj, numbersToWords
-teens (10-19): call the value from the obj, numbersToWords
-tens (20-90):
-   ex. 25 -> 'twenty-five'
-   length 25 === 2
-   left num = 2 -> twenty (from numbersToWords) + '-'
-   right num = 5 -> five (from numbersToWords)
-hundreds (100-900):
-   ex. 233 -> 'two hundred thirty-three'
-   length 233 === 3
-   loop through individ digits
-   first digit (2) -> 'two' + 'hundred'
-   second digit (3) -> 3*10 -> 'thirty' (from numbersToWords) + '-'
-   third digit (3) -> 3 (from numbersToWords) -> 'three'
-thousands (1000-9000):
-   ex. 3761 -> 'three thousand seven hundred sixty-one'
-   length 3761 === 4
-   loop through individ digits
-   first digit (3) -> 3*1000 -> 'three' + 'thousand'
-     3671.length === 1000.length (from numbersToPlace)
-   second digit (7) -> 7*100 -> 'seven' + 'hundred'
-   third digit (6) -> 6*10 ->
+// Helper function:
+// Determine how many numbers to place
 
-   ex. 36,000 -> ten thousand -> measure the length in 3s
-     starting from the right-most num, count in threes
-     to determine our place
+const obtainPlace = function (num) {
+  let result = '';
 
+  // convert num to string
+  const stringifiedNum = String(num);
 
-*/
-
-Number.prototype.toEnglish = function (number) {
-  var num = this; 
-  var result, numLeft, numInPlace, place, restOfString;
-  if (numbersToWords[num]) {
-    result = numbersToWords[num];
-  } else if (num < 100) {
-    numInPlace = Math.floor(num/10);
-    numLeft = num % 10;
-    result = numbersToWords[numInPlace * 10] + '-' + numbersToWords[numLeft];
-  } else {
-    if (num < 1000) {
-      place = 100;
+  // loop through numbersToPlace
+  for (const place in numbersToPlace) {
+    // If place.length <= stringified.length
+    if (place.length <= stringifiedNum.length) {
+      // result = place string
+      result = numbersToPlace[place];
     } else {
-      place = 1000;
-      while (place * 1000 <= num) {
-        place *= 1000;
-      }
-    }
-    numInPlace = Math.floor(num / place);
-    numLeft = num % place;
-    result = numInPlace.toEnglish() + ' ' + numbersToPlace[place];
-    restOfString = numLeft.toEnglish();
-    if (restOfString !== 'zero') {
-      result += ' ' + restOfString;
+      return result;
     }
   }
+
   return result;
 };
 
+// purpose: convert 3-digit (or smaller) numbers to English
+const threeDigitNumbers = function (num) {
+  let result = '';
+
+  // convert num to string
+  let stringifiedNum = String(num);
+
+  if (stringifiedNum.length === 3) {
+    const hundreds = numbersToWords[stringifiedNum[0]];
+    result += hundreds + ' hundred ';
+    stringifiedNum = stringifiedNum.slice(1);
+  }
+
+  if (stringifiedNum.length == 2) {
+    if (Number(stringifiedNum[0]) >= 2) {
+      var tens = numbersToWords[stringifiedNum[0] + '0'];
+      result += tens + ' ';
+      stringifiedNum = stringifiedNum.slice(1);
+    } else {
+      var tens = numbersToWords[stringifiedNum[0] + stringifiedNum[1]];
+      result += tens + ' ';
+      stringifiedNum = stringifiedNum.slice(2);
+    }
+  }
+
+  if (stringifiedNum.length === 1) {
+    const ones = numbersToWords[stringifiedNum[0]];
+    result += ones;
+  }
+
+  return result.trim();
+};
+
+
+const numberToEnglish = function () {
+  let result = '';
+  const num = this;
+
+  // num to string
+  let stringifiedNum = String(num);
+
+  // if string length isn't a multiple of 3...
+  if (stringifiedNum.length % 3 !== 0) {
+    // make it one
+    const numberOfZeroes = 3 - (stringifiedNum.length % 3);
+    for (let i = 0; i < numberOfZeroes; i++) {
+      stringifiedNum = '0' + stringifiedNum;
+    }
+  }
+
+  var traverseDigits = function (stringifiedNum) {
+    // base case
+    if (stringifiedNum.length < 3) {
+      return;
+    }
+
+    // get 3 numbers in english
+    const numToConvert = Number(stringifiedNum.slice(0, 3));
+    const threeNums = threeDigitNumbers(numToConvert);
+    result += ' ' + threeNums;
+
+    // get starting place
+    if (stringifiedNum.length > 3) {
+      const startingPlace = obtainPlace(num);
+      result += ' ' + startingPlace;
+    }
+
+    // Recurse - remove the first 3 digits
+    traverseDigits(stringifiedNum.slice(3));
+  };
+
+  traverseDigits(stringifiedNum);
+  return result.trim();
+};
+
+
 if (window.DEBUG) {
-  module.exports = Number.prototype.toEnglish;
+  module.exports = numberToEnglish;
 }
