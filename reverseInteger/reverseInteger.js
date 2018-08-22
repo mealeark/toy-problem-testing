@@ -19,16 +19,31 @@ Assume we are dealing with an environment which could only store integers within
 O: reversed number
 I: number
 C: linear
-     constraint: 32-bit-integer limit
+     constraint: 32-bit-integer limit (2,147,483,647)
 E: cases:
      if output begins with zero, remove the zero
      if input is negative num, make sure output is also neg
 
 Diagramming: 
+
+Input: -1230
+Output: -321
+
+1) stringify and reverse num
+'0321-'
+
+2) while there is a zero in front, remove it
+'321-'
+
+3) if last char is '-' move it to the front
+'-321'
+
+4) return finished product as a num
+-321
+
 */
  
-const reverse = function(x) {
- 
+const reverse = function(x) { 
 };
 
 if (window.DEBUG) {
