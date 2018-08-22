@@ -24,7 +24,7 @@ E: cases:
      if output begins with zero, remove the zero
      if input is negative num, make sure output is also neg
 
-Diagramming: 
+Diagramming:
 
 Input: -1230
 Output: -321
@@ -42,10 +42,25 @@ Output: -321
 -321
 
 */
- 
-const reverse = function(x) { 
+
+const reverseInteger = function(x) {
+  let copy = String(x).slice();
+  let reversed = copy.split('').reverse();
+
+  if (reversed[reversed.length - 1] === '-') {
+    let negativeSign = reversed.pop();
+    reversed.unshift(negativeSign);
+  }
+
+  let result = Number(reversed.join(''));
+  
+  if (result > -2147483647 && result < 2147483647) {
+    return result;
+  } else {
+    return 0;
+  }
 };
 
 if (window.DEBUG) {
-  module.exports = reverse;   
+  module.exports = reverseInteger;
 }
