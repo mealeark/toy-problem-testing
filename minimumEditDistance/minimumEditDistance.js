@@ -25,10 +25,12 @@ Replace 'n' with 'r', insert t, insert a
 */
 
 /*
-O:
-I:
-C:
-E:
+
+O: Number (min num of edits to convert str 1 -> str 2)
+I: Two Strings
+C: 
+E: 
+
 */
 
 let minimumEditDistance = function(s1, s2) {
