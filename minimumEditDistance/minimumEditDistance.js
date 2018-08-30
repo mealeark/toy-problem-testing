@@ -31,10 +31,57 @@ I: Two Strings
 C: 
 E: 
 
+Diagramming: 
+
+Input: 'geek', 'gesek'
+Output: 1 (1 insert of 's')
+
+Keep storage of str1 letters and their counts (even count denotes a match)
+letters = {'g': 1, 'e': 2, 'k': 1}
+
+Iterate through str2 letters to check which letters are already stored, incrementing those
+If not stored already, add a new letter with a new count
+
+str 2 iteration 0
+'g'
+Found in letters storage, so storage at 'g' increments
+letters = {'g': 2, 'e': 2, 'k': 1}
+
+str 2 iteration 1
+'e'
+Found in letters storage, so storage at 'e' increments
+letters = {'g': 2, 'e': 3, 'k': 1}
+
+str 2 iteration 2
+'s'
+NOT found in letters storage, so add 's' to storage
+letters = {'g': 2, 'e': 3, 'k': 1, 's': 1}
+
+str 2 iteration 3
+'e'
+Found in letters storage, so storage at 'e' increments
+letters = {'g': 2, 'e': 4, 'k': 1, 's': 1}
+
+str 2 iteration 4
+'k'
+Found in letters storage, so storage at 'k' increments
+letters = {'g': 2, 'e': 4, 'k': 2, 's': 1}
+
+
+Iterate through values of letters storage
+If the value is odd, increment the count of edits
+
+Number of odd values in letters storage:
+'g': 2 -> even
+'e': 4 -> even
+'k': 2 -> even
+'s': 1 -> ODD
+
+Total edits: 1
 */
 
 let minimumEditDistance = function(s1, s2) {
-
+  
 };
 
 if (window.DEBUG) {
