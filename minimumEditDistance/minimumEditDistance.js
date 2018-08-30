@@ -84,8 +84,6 @@ Number of odd values in letters storage:
 
 Total edits: 1
 
-
-
 ================ OPTIMIZED SOLUTION ====================
 
 
@@ -93,7 +91,19 @@ Total edits: 1
 */
 
 let minimumEditDistance = function(s1, s2) {
+  // store edit number
+  // store letter counts
+
+  // iterate through str1 letters to add letter and count to storage
   
+  // iterate through str 2 letters to check if letter is found in storage
+    // if letter is in storage, increment its count
+    // else, add new letter to storage with starting count of 1
+
+  // loop through storage
+    // if value (letter count) is even, increment edit number
+
+  // return edit number
 };
 
 if (window.DEBUG) {
