@@ -92,21 +92,45 @@ Total edits: 1
 
 let minimumEditDistance = function(s1, s2) {
   // store edit number
+  let minimumEdits = 0;
   // store letter counts
+  let letterStorage = {};
 
   // iterate through str1 letters to add letter and count to storage
+  for (let i = 0; i < s1.length; i++) {
+    let element1 = s1[i];
+    letterStorage[element1] = (letterStorage[element1] || 0) + 1;
+  }
   
   // iterate through str 2 letters to check if letter is found in storage
+  for (let i = 0; i < s2.length; i++) {
+    let element2 = s2[i];
     // if letter is in storage, increment its count
-    // else, add new letter to storage with starting count of 1
+    if (letterStorage[element2]) {
+      letterStorage[element2]++;
+    } else {
+      // else, add new letter to storage with starting count of 1
+      letterStorage[element2] = (letterStorage[element2] || 0) + 1;
+    }
+  }
 
+  console.log('stored ', letterStorage)
+    
   // loop through storage
-    // if value (letter count) is even, increment edit number
-
+  for (let letter in letterStorage) {
+     // if value (letter count) is odd, increment edit number
+     if (letterStorage[letter] % 2 !== 0) {
+       minimumEdits++;
+     }
+  }
+   
   // return edit number
+  return minimumEdits;
 };
 
-if (window.DEBUG) {
-  module.exports = minimumEditDistance;
-}
+console.log('Min edit dist ', minimumEditDistance('cat', 'cut'));
+
+// if (window.DEBUG) {
+//   module.exports = minimumEditDistance;
+// }
   
