@@ -29,9 +29,14 @@ Replace 'n' with 'r', insert t, insert a
 O: Number (min num of edits to convert str 1 -> str 2)
 I: Two Strings
 C: 
+  Time Complexity: Linear
+  Space Complexity: O(n)
 E: 
+  Edge Cases: None
 
 Diagramming: 
+
+================ LINEAR O(N) SOLUTION ====================
 
 Input: 'geek', 'gesek'
 Output: 1 (1 insert of 's')
@@ -78,6 +83,13 @@ Number of odd values in letters storage:
 's': 1 -> ODD
 
 Total edits: 1
+
+
+
+================ OPTIMIZED SOLUTION ====================
+
+
+
 */
 
 let minimumEditDistance = function(s1, s2) {
