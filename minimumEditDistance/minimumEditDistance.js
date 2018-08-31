@@ -41,48 +41,13 @@ Diagramming:
 Input: 'geek', 'gesek'
 Output: 1 (1 insert of 's')
 
-Keep storage of str1 letters and their counts (even count denotes a match)
-letters = {'g': 1, 'e': 2, 'k': 1}
+Input: 'cat', 'cut'
+Output: 1 (1 replacement of 'a' with 'u')
 
-Iterate through str2 letters to check which letters are already stored, incrementing those
-If not stored already, add a new letter with a new count
-
-str 2 iteration 0
-'g'
-Found in letters storage, so storage at 'g' increments
-letters = {'g': 2, 'e': 2, 'k': 1}
-
-str 2 iteration 1
-'e'
-Found in letters storage, so storage at 'e' increments
-letters = {'g': 2, 'e': 3, 'k': 1}
-
-str 2 iteration 2
-'s'
-NOT found in letters storage, so add 's' to storage
-letters = {'g': 2, 'e': 3, 'k': 1, 's': 1}
-
-str 2 iteration 3
-'e'
-Found in letters storage, so storage at 'e' increments
-letters = {'g': 2, 'e': 4, 'k': 1, 's': 1}
-
-str 2 iteration 4
-'k'
-Found in letters storage, so storage at 'k' increments
-letters = {'g': 2, 'e': 4, 'k': 2, 's': 1}
+Input: 'sunday', 'saturday'
+Output:  3 (1 replacement of 'n' with 'r', 1 insert of t, 1 insert of a)
 
 
-Iterate through values of letters storage
-If the value is odd, increment the count of edits
-
-Number of odd values in letters storage:
-'g': 2 -> even
-'e': 4 -> even
-'k': 2 -> even
-'s': 1 -> ODD
-
-Total edits: 1
 
 ================ OPTIMIZED SOLUTION ====================
 
@@ -90,47 +55,12 @@ Total edits: 1
 
 */
 
-let minimumEditDistance = function(s1, s2) {
-  // store edit number
-  let minimumEdits = 0;
-  // store letter counts
-  let letterStorage = {};
-
-  // iterate through str1 letters to add letter and count to storage
-  for (let i = 0; i < s1.length; i++) {
-    let element1 = s1[i];
-    letterStorage[element1] = (letterStorage[element1] || 0) + 1;
-  }
+const minimumEditDistance = function(s1, s2) {
   
-  // iterate through str 2 letters to check if letter is found in storage
-  for (let i = 0; i < s2.length; i++) {
-    let element2 = s2[i];
-    // if letter is in storage, increment its count
-    if (letterStorage[element2]) {
-      letterStorage[element2]++;
-    } else {
-      // else, add new letter to storage with starting count of 1
-      letterStorage[element2] = (letterStorage[element2] || 0) + 1;
-    }
-  }
-
-  console.log('stored ', letterStorage)
-    
-  // loop through storage
-  for (let letter in letterStorage) {
-     // if value (letter count) is odd, increment edit number
-     if (letterStorage[letter] % 2 !== 0) {
-       minimumEdits++;
-     }
-  }
-   
-  // return edit number
-  return minimumEdits;
 };
+ 
 
-console.log('Min edit dist ', minimumEditDistance('cat', 'cut'));
-
-// if (window.DEBUG) {
-//   module.exports = minimumEditDistance;
-// }
+if (window.DEBUG) {
+  module.exports = minimumEditDistance;
+}
   
