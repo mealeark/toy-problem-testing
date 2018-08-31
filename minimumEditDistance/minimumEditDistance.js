@@ -50,11 +50,15 @@ Output:  3 (1 replacement of 'n' with 'r', 1 insert of t, 1 insert of a)
 
 Helper Functions:
 
-Insert
+Insert (letter2)
+add letter2 after letter1
 
-Remove
+Remove (letter1)
+remove letter1 so s1 === s2
 
-Replace
+Replace (letter1, letter2)
+remove letter1
+add letter2 in its place (can use splice)
 
 -----------------------------------------------------------
 
@@ -106,14 +110,19 @@ Example: 'sunday', 'saturday'
 Keep count of edits
 
 If s1 length is less than s2 length
-  Iterate through s1 backwards
-    'y' 'a' 'd' 'n' 'u' 's'
-    compare each letter to letter in same position in s2
+  Iterate through s2 backwards
     'y' 'a' 'd' 'r' 'u' 't' 'a' 's'
+    
+    compare each letter to letter in same position in s1
+    'y' 'a' 'd' 'n' 'u' 's'
+    
     
     if not matching
     'n' !== 'r'
-    's' !== 't'
+    's' !== 't' but 's' is the last letter of s2 and s1 (match)
+    'a' !== undefined
+    's' !== undefined but 's' is the last letter of s2 and s1 (match)
+
     check if the letter requires
     insert -> 
       1 insert of 't'
@@ -137,7 +146,6 @@ const minimumEditDistance = function(s1, s2) {
   
 };
 
-  
 
 if (window.DEBUG) {
   module.exports = minimumEditDistance;
