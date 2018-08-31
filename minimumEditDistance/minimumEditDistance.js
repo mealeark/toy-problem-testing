@@ -46,6 +46,84 @@ Output: 1 (1 replacement of 'a' with 'u')
 
 Input: 'sunday', 'saturday'
 Output:  3 (1 replacement of 'n' with 'r', 1 insert of t, 1 insert of a)
+-----------------------------------------------------------
+
+Helper Functions:
+
+Insert
+
+Remove
+
+Replace
+
+-----------------------------------------------------------
+
+Main Function (s1, s2):
+Goal: convert s1 to look like s2
+
+Example: 'cat', 'cut'
+
+Keep count of edits
+
+Iterate through s1
+  'c' 'a' 't'
+  compare each letter to letter in same position in s2
+  'c' 'u' 't'
+  if not matching
+    'a' !== 'u'
+    check if the letter requires
+    insert 
+    remove 
+    replace -> 'a' replace with 'u' to make 'cut'
+    Increment edits accordingly
+    Edits = 1
+Return edit number
+
+-----------------------------------------------------------
+
+Example: 'geek', 'gesek'
+
+Keep count of edits
+
+Iterate through s1
+  'g' 'e' 'e' 'k'
+  compare each letter to letter in same position in s2
+  'g' 'e' 's' 'e' 'k'
+  if not matching
+    'e' !== 's'
+    check if the letter requires
+    insert -> insert 's' to make 'geek' into 'gesek'
+    remove 
+    replace 
+    Increment edits accordingly
+    Edits = 1
+Return edit number
+
+-----------------------------------------------------------
+
+Example: 'sunday', 'saturday'
+
+Keep count of edits
+
+If s1 length is less than s2 length
+  Iterate through s1 backwards
+    'y' 'a' 'd' 'n' 'u' 's'
+    compare each letter to letter in same position in s2
+    'y' 'a' 'd' 'r' 'u' 't' 'a' 's'
+    
+    if not matching
+    'n' !== 'r'
+    's' !== 't'
+    check if the letter requires
+    insert -> 
+      1 insert of 't'
+      1 insert of 'a'
+    remove 
+    replace -> 1 replacement of 'n' with 'r'
+
+    Increment edits accordingly
+    Edits = 1
+Return edit number
 
 
 
@@ -58,7 +136,8 @@ Output:  3 (1 replacement of 'n' with 'r', 1 insert of t, 1 insert of a)
 const minimumEditDistance = function(s1, s2) {
   
 };
- 
+
+  
 
 if (window.DEBUG) {
   module.exports = minimumEditDistance;
