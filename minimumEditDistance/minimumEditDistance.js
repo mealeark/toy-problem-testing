@@ -181,6 +181,13 @@ const replace(letter1, letter2) {
 
 };
 
+const assertNumberEquality = function(actual, expected, test) {
+  if (actual === expected) {
+    console.log(`TEST ${test} PASSED`);
+  } else {
+    console.log(`Test ${test} FAILED. Expected ${expected}, but got ${actual}`);
+  }
+};
 
 if (window.DEBUG) {
   module.exports = minimumEditDistance;
