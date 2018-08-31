@@ -143,7 +143,30 @@ Return edit number
 */
 
 const minimumEditDistance = function(s1, s2) {
+  // store minimum edit number 
+  // check if s1 length is less than s2 length
+    // iterate through s2 from right to left (decrement)
+      // compare letters from s2 to s1 at same idx positions
+      // if letters do not match
+        // check if insert will make s1 === s2
+          // increment edit number
+        // else if remove will make s1 === s2
+          // increment edit number
+        // else if replace will make s1 === s2
+          // increment edit number
+
+  // else s1 length is greater than or equal to s2 length
+    // iterate through s1 from left to right (increment)
+      // compare letters from s1 to s2 at same idx positions
+      // if letters do not match 
+        // check if insert will make s1 === s2
+          // increment edit number
+        // else if remove will make s1 === s2
+          // increment edit number
+        // else if replace will make s1 === s2
+          // increment edit number
   
+  // return minimum edit number  
 };
 
 
