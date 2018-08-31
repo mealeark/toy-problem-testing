@@ -170,15 +170,16 @@ const minimumEditDistance = function(s1, s2) {
 };
 
 const insert(letter2) {
-
+  // add letter2 after letter1
 };
 
 const remove(letter1) {
-
+  // remove letter1 so s1 === s2
 };
 
 const replace(letter1, letter2) {
-
+  // remove letter1
+  // add letter2 in its place (can use splice)
 };
 
 const assertNumberEquality = function(actual, expected, test) {
