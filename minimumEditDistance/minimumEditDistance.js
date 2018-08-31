@@ -169,6 +169,18 @@ const minimumEditDistance = function(s1, s2) {
   // return minimum edit number  
 };
 
+const insert(letter2) {
+
+};
+
+const remove(letter1) {
+
+};
+
+const replace(letter1, letter2) {
+
+};
+
 
 if (window.DEBUG) {
   module.exports = minimumEditDistance;
