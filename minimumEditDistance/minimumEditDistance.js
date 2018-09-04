@@ -1,193 +1,86 @@
 /*
-Given two strings str1 and str2 and below operations that can performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’.
+Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
 
-Insert
-Remove
-Replace
-All of the above operations are of equal cost.
+You have the following 3 operations permitted on a word:
 
-Examples:
+Insert a character
+Delete a character
+Replace a character
 
-Input:   str1 = "geek", str2 = "gesek"
-Output:  1
-We can convert str1 into str2 by inserting a 's'.
+Example 1:
 
-Input:   str1 = "cat", str2 = "cut"
-Output:  1
-We can convert str1 into str2 by replacing 'a' with 'u'.
+Input: word1 = "horse", word2 = "ros"
+Output: 3
+Explanation: 
+horse -> rorse (replace 'h' with 'r')
+rorse -> rose (remove 'r')
+rose -> ros (remove 'e')
 
-Input:   str1 = "sunday", str2 = "saturday"
-Output:  3
-Last three and first characters are same.  We basically
-need to convert "un" to "atur".  This can be done using
-below three operations. 
-Replace 'n' with 'r', insert t, insert a
+Example 2:
+
+Input: word1 = "intention", word2 = "execution"
+Output: 5
+Explanation: 
+intention -> inention (remove 't')
+inention -> enention (replace 'i' with 'e')
+enention -> exention (replace 'n' with 'x')
+exention -> exection (replace 'n' with 'c')
+exection -> execution (insert 'u')
 */
 
 /*
+Input: string1 and string2
+Output: number (min num to convert str1 -> str2)
+Complexities: 
+Edge Cases:
 
-O: Number (min num of edits to convert str 1 -> str 2)
-I: Two Strings
-C: 
-  Time Complexity: Linear
-  Space Complexity: O(n)
-E: 
-  Edge Cases: None
+Diagramming:
 
-Diagramming: 
+Goal: horse -> ros
 
-================ LINEAR O(N) SOLUTION ====================
+[h, o, r, s, e]
+[r, o, s]
 
-Input: 'geek', 'gesek'
-Output: 1 (1 insert of 's')
+1) h !== r 
+  replace h with r
+  = rorse
 
-Input: 'cat', 'cut'
-Output: 1 (1 replacement of 'a' with 'u')
+2) o === o
 
-Input: 'sunday', 'saturday'
-Output:  3 (1 replacement of 'n' with 'r', 1 insert of t, 1 insert of a)
------------------------------------------------------------
+3) r !== s 
+  remove r
+  = rose
 
-Helper Functions:
+4) at str.length - 1 for both words
+  e !== s && rose.length !== ros.length
+  remove e
+  = ros
 
-Insert (letter2)
-add letter2 after letter1
-
-Remove (letter1)
-remove letter1 so s1 === s2
-
-Replace (letter1, letter2)
-remove letter1
-add letter2 in its place (can use splice)
-
------------------------------------------------------------
-
-Main Function (s1, s2):
-Goal: convert s1 to look like s2
-
-Example: 'cat', 'cut'
-
-Keep count of edits
-
-Iterate through s1
-  'c' 'a' 't'
-  compare each letter to letter in same position in s2
-  'c' 'u' 't'
-  if not matching
-    'a' !== 'u'
-    check if the letter requires
-    insert 
-    remove 
-    replace -> 'a' replace with 'u' to make 'cut'
-    Increment edits accordingly
-    Edits = 1
-Return edit number
-
------------------------------------------------------------
-
-Example: 'geek', 'gesek'
-
-Keep count of edits
-
-Iterate through s1
-  'g' 'e' 'e' 'k'
-  compare each letter to letter in same position in s2
-  'g' 'e' 's' 'e' 'k'
-  if not matching
-    'e' !== 's'
-    check if the letter requires
-    insert -> insert 's' to make 'geek' into 'gesek'
-    remove 
-    replace 
-    Increment edits accordingly
-    Edits = 1
-Return edit number
-
------------------------------------------------------------
-
-Example: 'sunday', 'saturday'
-
-Keep count of edits
-
-If s1 length is less than s2 length
-  Iterate through s2 backwards
-    'y' 'a' 'd' 'r' 'u' 't' 'a' 's'
-    
-    compare each letter to letter in same position in s1
-    'y' 'a' 'd' 'n' 'u' 's'
-    
-    
-    if not matching
-    'n' !== 'r'
-    's' !== 't' but 's' is the last letter of s2 and s1 (match)
-    'a' !== undefined
-    's' !== undefined but 's' is the last letter of s2 and s1 (match)
-
-    check if the letter requires
-    insert -> 
-      1 insert of 't'
-      1 insert of 'a'
-    remove 
-    replace -> 1 replacement of 'n' with 'r'
-
-    Increment edits accordingly
-    Edits = 1
-Return edit number
-
-
-
-================ OPTIMIZED SOLUTION ====================
-
-
+5) loop through each item in str1's array to make sure it deeply equals str2's array
+[r, o, s] === [r, o, s]
 
 */
 
-const minimumEditDistance = function(s1, s2) {
-  // store minimum edit number 
-  // check if s1 length is less than s2 length
-    // iterate through s2 from right to left (decrement)
-      // compare letters from s2 to s1 at same idx positions
-      // if letters do not match
-        // check if insert will make s1 === s2
-          // increment edit number
-        // else if remove will make s1 === s2
-          // increment edit number
-        // else if replace will make s1 === s2
-          // increment edit number
-
-  // else s1 length is greater than or equal to s2 length
-    // iterate through s1 from left to right (increment)
-      // compare letters from s1 to s2 at same idx positions
-      // if letters do not match 
-        // check if insert will make s1 === s2
-          // increment edit number
-        // else if remove will make s1 === s2
-          // increment edit number
-        // else if replace will make s1 === s2
-          // increment edit number
-  
-  // return minimum edit number  
+const insert = function(letter2, s1Index, s1) {
+  s1 = s1.split('')
+  s1.splice(s1Index, 0, letter2);
+  return s1.join('');
 };
 
-const insert(letter2) {
-  // add letter2 after letter1
+const remove = function(s1Index, s1) {
+  s1 = s1.split('')
+  s1.splice(s1Index, 1);
+  return s1.join('');
 };
 
-const remove(letter1) {
-  // remove letter1 so s1 === s2
+const replace = function(letter2, s1Index, s1) {
+  s1 = s1.split('')
+  s1.splice(s1Index, 1, letter2);
+  return s1.join('');
 };
 
-const replace(letter1, letter2) {
-  // remove letter1
-  // add letter2 in its place (can use splice)
-};
-
-const assertNumberEquality = function(actual, expected, test) {
-  if (actual === expected) {
-    console.log(`TEST ${test} PASSED`);
-  } else {
-    console.log(`Test ${test} FAILED. Expected ${expected}, but got ${actual}`);
-  }
+var minDistance = function(word1, word2) {
+    
 };
 
 if (window.DEBUG) {
