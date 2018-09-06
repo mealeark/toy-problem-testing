@@ -48,7 +48,7 @@ e [ 5, 4, 4, 3 ]
 
 */
 
-var minDistance = function(str1, str2) {
+var minimumEditDistance = function(str1, str2) {
   //  If str1 is empty, insert all characters of str2 
   if (str1.length == 0) return str2.length; 
   // If str2 is empty, only remove all characters of str1
