@@ -125,7 +125,7 @@ Output: [
 ----------------
 Analysis
 
-Complexities:
+Complexities: O(N^2) time to iterate through the subarrays, and O(N) space to store all employees' hours range
 
 ----------------
 Code
@@ -136,8 +136,48 @@ Test
 ----------------
 */
 
-var employeeFreeTime = function(schedule) {
-    
+let employeeFreeTime = function(schedule) {
+  // store result array
+
+
+  // make copy of schedule
+
+  // store employee hours worked in a set
+  // store missing hours
+
+  // store min value of range
+  // store max value of range
+  // store all nums within range
+
+  // create range of all poss hours worked through flattening all subarrays (of copy) into one large array
+      // sort the large array
+      // grab minimum value
+      // grab max value 
+
+  // iterate from min to max value 
+      // add each value into an array of consecutive nums 
+
+  // iterate through orig schedule
+      // for each employee's schedule (subarray), iterate through the items
+      // add employee numbers to set to remove duplicate hours
+
+  // iterate through set of employees' hours and check if included in array of all poss nums
+      // if not included, add value to missing hours array
+
+  // sort missing hours array
+  // loop through missing hours
+      // if hours aren't consecutive, add curr num to result array in a tuple with its next value
+      // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
+
+  // return results array
+};
+
+let assertArraysEqual = function(actual, expected, testName) {
+  if ( actual.length === expected.length && actual.every(function(elem, idx) {return elem === expected[idx]}) ) {
+      console.log(`Test ${testName} PASSED!`);
+  } else {
+      console.log(`Test ${testName} FAILED. Expected ${expected}, but got ${actual}`);
+  }
 };
 
 if (window.DEBUG) {
