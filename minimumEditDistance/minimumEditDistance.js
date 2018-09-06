@@ -48,7 +48,7 @@ e [ 5, 4, 4, 3 ]
 
 */
 
-var minimumEditDistance = function(str1, str2) {
+var minDistance = function(str1, str2) {
   //  If str1 is empty, insert all characters of str2 
   if (str1.length == 0) return str2.length; 
   // If str2 is empty, only remove all characters of str1
@@ -67,10 +67,11 @@ var minimumEditDistance = function(str1, str2) {
       } else if (c === 0) {
         // for first column, add row numbers
         matrix[r][c] = r;
-      // if last letter in str1 equals last letter in str2
+      // if letter in str1 equals letter in str2
       } else if (str1[r - 1] === str2[c - 1]) {
-        // set current cell to value of last row, last col
+        // set current cell to value to diagonal value
         matrix[r][c] = matrix[r - 1][c - 1];
+      // if letter in str1 doesn't equal letter in str2
       } else {
         // set current cell to the minimum number from 3 diff edit choices
         matrix[r][c] = Math.min(
