@@ -5,11 +5,11 @@ describe('employeeFreeTime', () => {
     expect(employeeFreeTime).toBeInstanceOf(Function);
   });
 
-  test('returns a minimum edit of 3 for "horse" and "ros"', () => {
-    expect(employeeFreeTime("horse", "ros")).toEqual(3);
+  test('test name', ('finds common leisure time intervals') => {
+    expect(employeeFreeTime([[[1,2],[5,6]],[[1,3]],[[4,10]]])).toEqual([[3,4]]);
   });
 
-  test('returns a minimum edit of 5 for "intention" and "execution"', () => {
-    expect(employeeFreeTime("intention", "execution")).toEqual(5);
+  test('test name', ('finds common leisure time intervals') => {
+    expect(employeeFreeTime([[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]]]).toEqual([[5,6],[7,9]]);
   });
 });
