@@ -32,55 +32,63 @@ exection -> execution (insert 'u')
 Input: string1 and string2
 Output: number (min num to convert str1 -> str2)
 Complexities: 
-Edge Cases:
+Edge Cases: 
+  - if str1 is empty, copy all letters of str2
+  - if str2 is empty, remove all letters of str1
 
 Diagramming:
 
-Goal: horse -> ros
-
-[h, o, r, s, e]
-[r, o, s]
-
-1) h !== r 
-  replace h with r
-  = rorse
-
-2) o === o
-
-3) r !== s 
-  remove r
-  = rose
-
-4) at str.length - 1 for both words
-  e !== s && rose.length !== ros.length
-  remove e
-  = ros
-
-5) loop through each item in str1's array to make sure it deeply equals str2's array
-[r, o, s] === [r, o, s]
+    r  o  s
+h [ 0, 1, 2, 3 ]
+o [ 1, 1, 2, 3 ]
+r [ 2, 2, 1, 2 ]
+s [ 3, 2, 2, 2 ]
+e [ 4, 3, 3, 2 ]
+  [ 5, 4, 4, 3 ]
 
 */
 
-const insert = function(letter2, s1Index, s1) {
-  s1 = s1.split('')
-  s1.splice(s1Index, 0, letter2);
-  return s1.join('');
-};
+var minDistance = function(str1, str2) {
+  //  If str1 is empty, insert all characters of str2 
+  if (str1.length == 0) return str2.length; 
+  // If str2 is empty, only remove all characters of str1
+  if (str2.length == 0) return str1.length; 
 
-const remove = function(s1Index, s1) {
-  s1 = s1.split('')
-  s1.splice(s1Index, 1);
-  return s1.join('');
-};
+  const matrix = [];
+  
+  // increment across rows and columns
+  for (let r = 0; r <= str1.length; r++) {
+    // add each row
+    matrix[r] = [];
+    for (let c = 0; c <= str2.length; c++) {
+      // for first row, add column numbers
+      if (r === 0) {
+        matrix[r][c] = c;
+      } else if (c === 0) {
+        // for first column, add row numbers
+        matrix[r][c] = r;
+      // if last letter in str1 equals last letter in str2
+      } else if (str1[r - 1] === str2[c - 1]) {
+        // set current cell to value of last row, last col
+        matrix[r][c] = matrix[r - 1][c - 1];
+      } else {
+        // set current cell to the minimum number from 3 diff edit choices
+        console.log('insert ', matrix[r][c - 1] + 1)
+        console.log('replace ', matrix[r - 1][c - 1] + 1)
+        console.log('remove ', matrix[r - 1][c] + 1)
 
-const replace = function(letter2, s1Index, s1) {
-  s1 = s1.split('')
-  s1.splice(s1Index, 1, letter2);
-  return s1.join('');
-};
-
-var minDistance = function(word1, word2) {
-    
+        matrix[r][c] = Math.min(
+          matrix[r][c - 1] + 1, // insertion
+          matrix[r - 1][c - 1] + 1, // substitution
+          matrix[r - 1][c] + 1 // deletion
+         );
+      }
+    }
+  }
+  
+  matrix.forEach(row => console.log(row));
+  // return the bottom, far right cell, representing the number of min edits
+  return matrix[str1.length][str2.length];
 };
 
 if (window.DEBUG) {
