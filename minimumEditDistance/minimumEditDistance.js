@@ -73,10 +73,6 @@ var minDistance = function(str1, str2) {
         matrix[r][c] = matrix[r - 1][c - 1];
       } else {
         // set current cell to the minimum number from 3 diff edit choices
-        console.log('insert ', matrix[r][c - 1] + 1)
-        console.log('replace ', matrix[r - 1][c - 1] + 1)
-        console.log('remove ', matrix[r - 1][c] + 1)
-
         matrix[r][c] = Math.min(
           matrix[r][c - 1] + 1, // insertion
           matrix[r - 1][c - 1] + 1, // substitution
@@ -86,7 +82,6 @@ var minDistance = function(str1, str2) {
     }
   }
   
-  matrix.forEach(row => console.log(row));
   // return the bottom, far right cell, representing the number of min edits
   return matrix[str1.length][str2.length];
 };
