@@ -75,9 +75,9 @@ var minimumEditDistance = function(str1, str2) {
       } else {
         // set current cell to the minimum number from 3 diff edit choices
         matrix[r][c] = Math.min(
-          matrix[r][c - 1] + 1, // insertion
-          matrix[r - 1][c - 1] + 1, // substitution
-          matrix[r - 1][c] + 1 // deletion
+          matrix[r][c - 1] + 1, // deletion (left value on matrix)
+          matrix[r - 1][c - 1] + 1, // substitution (diagonal value on matrix)
+          matrix[r - 1][c] + 1 // insertion (top value on matrix)
          );
       }
     }
