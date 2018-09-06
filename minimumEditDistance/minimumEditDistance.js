@@ -46,6 +46,15 @@ r [ 3, 2, 2, 2 ]
 s [ 4, 3, 3, 2 ]
 e [ 5, 4, 4, 3 ]
 
+Bottom right cell: 3 total min edits 
+Find the mins between top, left, and diagonal numbers
+
+1) 3 came from top num: 2 (+ 1) -> insert 'e'
+2) 2 stays the same b/c 's' matches on both strings (move diagonally)
+3) 2 comes from top num: 1 (+ 1) -> insert 'r'
+4) 1 stays the same b/c 'o' matches on both strings (move diag)
+5) 1 comes from diag 0 (+ 1) -> substitute 'r' for 'h' 
+
 */
 
 var minimumEditDistance = function(str1, str2) {
