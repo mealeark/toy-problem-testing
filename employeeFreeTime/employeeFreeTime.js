@@ -25,6 +25,117 @@ schedule and schedule[i] are lists with lengths in range [1, 50].
 0 <= schedule[i].start < schedule[i].end <= 10^8.
 */
 
+/*
+Requirements
+
+Ouput: Array of arrays (list of time intervals)
+Input: Array of arrays which can consist of multiple interval tuples each
+Edge Cases: 
+- Discard any intervals that contain inf as they aren't finite.
+
+----------------
+Ideas
+
+Creating a range based off the tuple intervals
+
+Example 1:
+schedule = [
+              [ [1,2],[5,6] ],
+              [ [1,3] ],
+              [ [4,10] ]
+           ]
+           
+HOURS ARE EXCLUSIVE OF END NUM IN INTERVAL
+
+Employee 1:
+[1,2]           [5,6]
+1                5
+
+Employee 2:
+[1,3]
+1 - 2
+
+
+Employee 3:
+[4,10]
+4 - 5 - 6 - 7 - 8 - 9
+
+Minimum of all employees' hours
+Min: 1
+
+Maximum of all employees' hours
+Max: 10
+
+Range from min to max:
+1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10
+
+Find missing number 
+Missing: 3
+If only one hour missing, add interval of one hour from the missing value 
+[3,4]
+
+Output: [ [3,4] ]
+
+===========================================================================
+
+Example 2: 
+schedule = [
+              [ [1,3],[6,7] ],
+              [ [2,4] ] ,
+              [ [2,5],[9,12] ]
+          ]
+        
+HOURS ARE EXCLUSIVE OF END NUM IN INTERVAL
+
+Employee 1:
+[1,3]           [6,7]
+1 - 2            6
+
+Employee 2:
+[2,4]
+2 - 3
+
+
+Employee 3:
+[2,5]              [9,12]
+2 - 3 - 4          9 - 10 - 11
+
+Minimum of all employees' hours
+Min: 1
+
+Maximum of all employees' hours
+Max: 11
+
+Range from min to max:
+1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11
+
+Find missing number 
+Missing: 5, 7, 8
+If only one hour missing, add interval of one hour from the missing value 
+[3,4]
+If hours missing are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
+
+Output: [ 
+          [5,6],
+          [7,9] 
+        ]
+
+
+
+----------------
+Analysis
+
+Complexities:
+
+----------------
+Code
+
+----------------
+Test
+
+----------------
+*/
+
 var employeeFreeTime = function(schedule) {
     
 };
