@@ -138,45 +138,62 @@ Test
 
 let employeeFreeTime = function(schedule) {
   // store result array
-
-
+  let leisureTime = [];
+  
   // make copy of schedule
-
+  let sched = schedule.slice();
+  
   // store employee hours worked in a set
+  let employeeHours = new Set();
   // store missing hours
-
+  let freeHours = [];
+  
   // store min value of range
+  let rangeMin = null;
   // store max value of range
+  let rangeMax = null;
   // store all nums within range
-
+  let fullRange = [];
+  
   // create range of all poss hours worked through flattening all subarrays (of copy) into one large array
-      // sort the large array
-      // grab minimum value
-      // grab max value 
-
+  let flattenedSched = sched.flat(sched.length);
+  // sort the large array
+  let sortedSched = flattenedSched.sort( (a,b) => {return a - b} )
+  
+    
+  // grab minimum value
+  rangeMin = sortedSched[0];
+  // grab max value 
+  rangeMax = sortedSched[sortedSched.length - 1];
+  
   // iterate from min to max value 
-      // add each value into an array of consecutive nums 
-
+  for (let i = rangeMin; i <= rangeMax.length; i++ {
+    // add each value into an array of consecutive nums 
+    fullRange.push(i);
+  }
+  
   // iterate through orig schedule
-      // for each employee's schedule (subarray), iterate through the items
+  for 
+    // for each employee's schedule (subarray), iterate through the items
       // add employee numbers to set to remove duplicate hours
-
+  
   // iterate through set of employees' hours and check if included in array of all poss nums
-      // if not included, add value to missing hours array
-
+    // if not included, add value to missing hours array
+  
   // sort missing hours array
   // loop through missing hours
-      // if hours aren't consecutive, add curr num to result array in a tuple with its next value
-      // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
-
+    // if hours aren't consecutive, add curr num to result array in a tuple with its next value
+    // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
+  
   // return results array
+  return leisureTime;
 };
 
 let assertArraysEqual = function(actual, expected, testName) {
   if ( actual.length === expected.length && actual.every(function(elem, idx) {return elem === expected[idx]}) ) {
-      console.log(`Test ${testName} PASSED!`);
+    console.log(`Test ${testName} PASSED!`);
   } else {
-      console.log(`Test ${testName} FAILED. Expected ${expected}, but got ${actual}`);
+    console.log(`Test ${testName} FAILED. Expected ${expected}, but got ${actual}`);
   }
 };
 
