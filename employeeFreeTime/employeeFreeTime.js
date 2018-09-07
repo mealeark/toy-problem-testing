@@ -193,8 +193,6 @@ let employeeFreeTime = function(schedule) {
   }
   
   let allEmployeesHours = Array.from(employeeHours).sort( (a,b) => {return a - b} );;
-  console.log('full ',fullRange)
-  console.log('hours ',allEmployeesHours)
   
   // iterate through set of employees' hours and check if included in array of all poss nums
   for (let i = 0; i < fullRange.length; i++) {
@@ -202,37 +200,32 @@ let employeeFreeTime = function(schedule) {
     if (!allEmployeesHours.includes(fullRange[i])) {
       freeHours.push(fullRange[i]);
     }
-  }
+  }  
   
   // sort missing hours array
   let sortedFreeHours = freeHours.sort( (a, b) => {return a - b} );
-  console.log('missing ', freeHours)
+  
   // loop through missing hours
   for (let i = 0; i < sortedFreeHours.length; i++) {
-    // if hours aren't consecutive, add curr num to result array in a tuple with its next value
-    if (sortedFreeHours[i] + 1 !== sortedFreeHours[i + 1] && sortedFreeHours[i] !== rangeMax) {
-      // if num is a max, ignore it
-      leisureTime.push([sortedFreeHours[i], sortedFreeHours[i] + 1]);
-    } else if (sortedFreeHours[i] + 1 === sortedFreeHours[i + 1] && sortedFreeHours[i] !== rangeMax && !leisureTime.includes(sortedFreeHours[i + 1] + 1) ) {
-    // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
-      leisureTime.push([sortedFreeHours[i], sortedFreeHours[i + 1]]);
+    
+    // if num is a max, ignore it
+    if (sortedFreeHours.includes(rangeMax)) {
+      sortedFreeHours.pop();
     }
-  }
-  
-  // remove duplicates from result
- 
+    
+    // if hours aren't consecutive, add curr num to result array in a tuple with its next value
+    if (sortedFreeHours[i] + 1 !== sortedFreeHours[i + 1]) {
+      leisureTime.push([sortedFreeHours[i], sortedFreeHours[i] + 1]);
+    } else if (sortedFreeHours[i] + 1 === sortedFreeHours[i + 1]) {
+    // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
+      leisureTime.push( [sortedFreeHours[i], sortedFreeHours[i + 1] + 1] );
+      break;
+    }
+    
+  } 
   
   // return results array
-  console.log(leisureTime)
   return leisureTime;
-};
-
-let assertArraysEqual = function(actual, expected, testName) {
-  if ( actual.length === expected.length && actual.every(function(elem, idx) {return elem === expected[idx]}) ) {
-    console.log(`Test ${testName} PASSED!`);
-  } else {
-    console.log(`Test ${testName} FAILED. Expected ${expected}, but got ${actual}`);
-  }
 };
 
 if (window.DEBUG) {
