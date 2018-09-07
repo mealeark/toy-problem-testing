@@ -125,7 +125,7 @@ Output: [
 ----------------
 Analysis
 
-Complexities: O(N^2) time to iterate through the subarrays, and O(N) space to store all employees' hours range
+Complexities: O(N^3) time to iterate through the subarrays, and O(N) space to store all employees' hours range
 
 ----------------
 Code
@@ -156,36 +156,74 @@ let employeeFreeTime = function(schedule) {
   let fullRange = [];
   
   // create range of all poss hours worked through flattening all subarrays (of copy) into one large array
-  let flattenedSched = sched.flat(sched.length);
+  let flattenedSched = sched.reduce(function(a, b) {
+    return a.concat(b);
+  });
   // sort the large array
-  let sortedSched = flattenedSched.sort( (a,b) => {return a - b} )
+  let sortedSched = flattenedSched.sort( (a,b) => {return a - b} );
   
-    
   // grab minimum value
-  rangeMin = sortedSched[0];
+  rangeMin = sortedSched[0][0];
   // grab max value 
-  rangeMax = sortedSched[sortedSched.length - 1];
+  rangeMax = sortedSched[sortedSched.length - 1][1];
   
   // iterate from min to max value 
-  for (let i = rangeMin; i <= rangeMax.length; i++ {
+  for (let i = rangeMin; i <= rangeMax; i++) {
     // add each value into an array of consecutive nums 
     fullRange.push(i);
   }
   
   // iterate through orig schedule
-  for 
+  for (let i = 0; i < schedule.length; i++) {
     // for each employee's schedule (subarray), iterate through the items
       // add employee numbers to set to remove duplicate hours
+    for (let j = 0; j < schedule[i].length; j++) {
+      // if interval consists of two consec nums, remove the second
+      if (schedule[i][j][0] + 1 === schedule[i][j][1]) {
+        employeeHours.add(schedule[i][j][0]);   
+      } else {
+      // else add a range of nums from 1st num to 2nd to employee hours
+        for (let hr = schedule[i][j][0]; hr <= schedule[i][j][1]; hr++) {
+          employeeHours.add(hr);
+        }
+      }
+      // exclude the end of intervals
+      employeeHours.delete(schedule[i][j][1]);
+    }
+  }
+  
+  let allEmployeesHours = Array.from(employeeHours).sort( (a,b) => {return a - b} );;
+  console.log('full ',fullRange)
+  console.log('hours ',allEmployeesHours)
   
   // iterate through set of employees' hours and check if included in array of all poss nums
+  for (let i = 0; i < fullRange.length; i++) {
     // if not included, add value to missing hours array
+    if (!allEmployeesHours.includes(fullRange[i])) {
+      freeHours.push(fullRange[i]);
+    }
+  }
   
   // sort missing hours array
+  let sortedFreeHours = freeHours.sort( (a, b) => {return a - b} );
+  console.log('missing ', freeHours)
   // loop through missing hours
+  for (let i = 0; i < sortedFreeHours.length; i++) {
     // if hours aren't consecutive, add curr num to result array in a tuple with its next value
+    if (sortedFreeHours[i] + 1 !== sortedFreeHours[i + 1] && sortedFreeHours[i] !== rangeMax) {
+      // if num is a max, ignore it
+      leisureTime.push([sortedFreeHours[i], sortedFreeHours[i] + 1]);
+    } else if (sortedFreeHours[i] + 1 === sortedFreeHours[i + 1] && sortedFreeHours[i] !== rangeMax && !leisureTime.includes(sortedFreeHours[i + 1] + 1) ) {
     // if hours are consecutive, take the min to add to tuple and take the max + 1 to be the end of the tuple
+      leisureTime.push([sortedFreeHours[i], sortedFreeHours[i + 1]]);
+    }
+  }
+  
+  // remove duplicates from result
+ 
   
   // return results array
+  console.log(leisureTime)
   return leisureTime;
 };
 
