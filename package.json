@@ -25,7 +25,9 @@
     "url": "https://github.com/JohnWebb4/toy-problem-testing/issues"
   },
   "homepage": "https://github.com/JohnWebb4/toy-problem-testing#readme",
-  "dependencies": {},
+  "dependencies": {
+    "underscore": "^1.9.1"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^23.4.0",
